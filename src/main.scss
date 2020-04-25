@@ -1,6 +1,94 @@
+$blue: #004777;
+$red: #a30000;
+$yellow: #f7b801;
+$orange: #ffe5ca;
+
 body {
   font-family: "Noto Sans", sans-serif;
+  background: $orange;
+
+  & .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    & .header {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      & .header-title {
+        color: $red;
+      }
+    } //end of header
+    & .hours-container {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & .withTwo {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        text-align: center;
+        & .timer-wrapper {
+          margin: 10px;
+        }
+        .timer-time {
+          font-size: 1.8rem;
+        }
+      }
+      & .withTwo2 {
+        justify-content: flex-start;
+      }
+    } //end of hours container
+    & .details-container {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      margin-top: 20px;
+      & .details-title {
+        text-decoration: underline;
+        height: 16px;
+      }
+      & .details-detail {
+        height: 14px;
+      }
+      & span {
+        font-weight: bold;
+        color: $blue;
+      }
+      .mb {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .hours-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 360px) {
   .timer-time {
-    text-align: center;
+    font-size: 1.4rem !important;
+  }
+  .details-container {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .details-container {
+    font-size: 0.8rem;
   }
 }

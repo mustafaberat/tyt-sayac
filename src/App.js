@@ -7,12 +7,13 @@ const TARGET_MONTH = 6; // 0 is january so -1 all the time, check it
 const TARGET_DAY = 25;
 const TARGET_HOUR = 10;
 const TARGET_MINUTE = 15;
+const INNER_WIDTH = (window.innerWidth / 2.6) > 180 ? 180 : (window.innerWidth / 2.6);
 
 const detailSecond = ({ remainingTime }) => {
   return (
     <div className="timer">
       <div className="timer-time">{remainingTime}</div>
-      <div className="timer-title">seconds</div>
+      <div className="timer-title">saniye</div>
     </div>
   );
 };
@@ -21,7 +22,7 @@ const detailDay = ({ remainingTime }) => {
   return (
     <div className="timer">
       <div className="timer-time">{remainingTime}</div>
-      <div className="timer-title">days</div>
+      <div className="timer-title">gün</div>
     </div>
   );
 };
@@ -30,7 +31,7 @@ const detailHour = ({ remainingTime }) => {
   return (
     <div className="timer">
       <div className="timer-time">{remainingTime}</div>
-      <div className="timer-title">hours</div>
+      <div className="timer-title">saat</div>
     </div>
   );
 };
@@ -39,7 +40,7 @@ const detailMinute = ({ remainingTime }) => {
   return (
     <div className="timer">
       <div className="timer-time">{remainingTime}</div>
-      <div className="timer-title">minutes</div>
+      <div className="timer-title">dakika</div>
     </div>
   );
 };
@@ -48,7 +49,7 @@ const detailMinute2 = ({ remainingTime }) => {
   return (
     <div className="timer">
       <div className="timer-time">{remainingTime}</div>
-      <div className="timer-title">updating..</div>
+      <div className="timer-title">güncelleniyor..</div>
     </div>
   );
 };
@@ -61,6 +62,7 @@ const Second = (props) => {
         isPlaying
         initialRemainingTime={props.value}
         duration={60}
+        size={INNER_WIDTH}
         onComplete={() => [true, 0]}
         colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
       >
@@ -76,6 +78,7 @@ const Minute = (props) => {
       <CountdownCircleTimer
         initialRemainingTime={props.value}
         duration={60}
+        size={INNER_WIDTH}
         onComplete={() => [true, 0]}
         colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
       >
@@ -91,6 +94,7 @@ const Minute2 = (props) => {
       <CountdownCircleTimer
         initialRemainingTime={props.value}
         duration={60}
+        size={INNER_WIDTH}
         onComplete={() => [true, 0]}
         colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
       >
@@ -107,6 +111,7 @@ const Day = (props) => {
         isPlaying={false}
         initialRemainingTime={props.value}
         duration={365}
+        size={INNER_WIDTH}
         onComplete={() => [true, 0]}
         colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
       >
@@ -123,6 +128,7 @@ const Hour = (props) => {
         isPlaying={false}
         initialRemainingTime={props.value}
         duration={24}
+        size={INNER_WIDTH}
         onComplete={() => [true, 0]}
         colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
       >
@@ -157,18 +163,35 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        <div style={{ display: 'flex' }}>
-          <Day value={remainDays} />
-          <Hour value={remainHours} />
-          {remainSecond === 0 ? <Minute2 value={remainMinutes} /> : <Minute value={remainMinutes} />}
-          <Second value={remainSecond} />
+        <div className="header">
+          <h1 className="header-title">TYT 2020 Sayacı</h1>
+        </div>
+        <div className="hours-container">
+          <div className="withTwo withTwo1">
+            <Day value={remainDays} />
+            <Hour value={remainHours} />
+          </div>
+          <div className="withTwo withTwo2">
+            {remainSecond === 0 ? <Minute2 value={remainMinutes} /> : <Minute value={remainMinutes} />}
+            <Second value={remainSecond} />
+          </div>
         </div>
 
-        <h1>Remain: {this.state.remainMs}</h1>
+        <section className="details-container">
+          <h3 className="details-title">Ayrıntılar</h3>
+          <p className="details-detail">Temel Yeterlilik Testi</p>
+          <p className="details-detail">Yükseköğretim Kurumları Sınavı 1. Oturum</p>
+          <p className="details-detail">Sınav Tarihi: <span>25 Temmuz 2020 Cumartesi</span></p>
+          <p className="details-detail">Sınav Saati: <span>10.15</span></p>
+          <p className="details-detail mb">Sınav Süresi: <span>135 dk</span></p>
+
+        </section>
+
+        {/* <h1>Remain: {this.state.remainMs}</h1>
         <h1>Remain Days: {remainDays}</h1>
         <h1>Remain Hours: {remainHours}</h1>
         <h1>Remain Minutes: {remainMinutes}</h1>
-        <h1>Remain Second: {remainSecond}</h1>
+        <h1>Remain Second: {remainSecond}</h1> */}
 
       </div>
     );
