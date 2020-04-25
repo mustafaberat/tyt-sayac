@@ -164,7 +164,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="header">
-          <h1 className="header-title">TYT 2020 Sayacı</h1>
+          <h1 className="header-title">TYT {TARGET_YEAR} Sayacı</h1>
         </div>
         <div className="hours-container">
           <div className="withTwo withTwo1">
@@ -181,7 +181,7 @@ class App extends React.Component {
           <h3 className="details-title">Ayrıntılar</h3>
           <p className="details-detail">Temel Yeterlilik Testi</p>
           <p className="details-detail">Yükseköğretim Kurumları Sınavı 1. Oturum</p>
-          <p className="details-detail">Sınav Tarihi: <span>25 Temmuz 2020 Cumartesi</span></p>
+          <p className="details-detail">Sınav Tarihi: <span>{TARGET_DAY} Temmuz {TARGET_YEAR} Cumartesi</span></p>
           <p className="details-detail">Sınav Saati: <span>10.15</span></p>
           <p className="details-detail mb">Sınav Süresi: <span>135 dk</span></p>
 
