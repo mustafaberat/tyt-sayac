@@ -44,6 +44,15 @@ const detailMinute = ({ remainingTime }) => {
   );
 };
 
+const detailMinute2 = ({ remainingTime }) => {
+  return (
+    <div className="timer">
+      <div className="timer-time">{remainingTime}</div>
+      <div className="timer-title">updating..</div>
+    </div>
+  );
+};
+
 
 const Second = (props) => {
   return (
@@ -71,6 +80,21 @@ const Minute = (props) => {
         colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
       >
         {detailMinute}
+      </CountdownCircleTimer>
+    </div>
+  )
+}
+
+const Minute2 = (props) => {
+  return (
+    <div className="timer-wrapper">
+      <CountdownCircleTimer
+        initialRemainingTime={props.value}
+        duration={60}
+        onComplete={() => [true, 0]}
+        colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
+      >
+        {detailMinute2}
       </CountdownCircleTimer>
     </div>
   )
@@ -114,12 +138,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      forReFresh: false,
       remainMs: Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000,
-      remainDays: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000) / 86400),
-      remainHours: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000) / 3600) % 24,
-      remainMinutes: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000) / 60) % 60,
-      remainSecond: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000)) % 60,
     }
   }
 
@@ -127,28 +146,29 @@ class App extends React.Component {
     setInterval(() => {
       this.setState({
         remainMs: Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000,
-        remainDays: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000) / 86400),
-        remainHours: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000) / 3600) % 24,
-        remainMinutes: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000) / 60) % 60,
-        remainSecond: Math.floor((Math.abs(new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, TARGET_HOUR, TARGET_MINUTE).getTime() - new Date().getTime()) / 1000)) % 60,
       })
     }, 1000)
   }
   render() {
+    let remainDays = Math.floor(this.state.remainMs / 86400);
+    let remainHours = Math.floor(this.state.remainMs / 3600) % 24;
+    let remainMinutes = Math.floor(this.state.remainMs / 60) % 60;
+    let remainSecond = Math.floor(this.state.remainMs) % 60;
+
     return (
       <div className="container">
         <div style={{ display: 'flex' }}>
-          <Day value={this.state.remainDays} />
-          <Hour value={this.state.remainHours} />
-          {this.state.remainSecond % 2 === 0 ? <Day value={this.state.remainMinutes} /> : <Minute value={this.state.remainMinutes} />}
-          <Second value={this.state.remainSecond} />
+          <Day value={remainDays} />
+          <Hour value={remainHours} />
+          {remainSecond === 0 ? <Minute2 value={remainMinutes} /> : <Minute value={remainMinutes} />}
+          <Second value={remainSecond} />
         </div>
 
         <h1>Remain: {this.state.remainMs}</h1>
-        <h1>Remain Days: {this.state.remainDays}</h1>
-        <h1>Remain Hours: {this.state.remainHours}</h1>
-        <h1>Remain Minutes: {this.state.remainMinutes}</h1>
-        <h1>Remain Second: {this.state.remainSecond}</h1>
+        <h1>Remain Days: {remainDays}</h1>
+        <h1>Remain Hours: {remainHours}</h1>
+        <h1>Remain Minutes: {remainMinutes}</h1>
+        <h1>Remain Second: {remainSecond}</h1>
 
       </div>
     );
