@@ -7,7 +7,7 @@ const TARGET_MONTH = 6; // 0 is january so -1 all the time, check it
 const TARGET_DAY = 25;
 const TARGET_HOUR = 10;
 const TARGET_MINUTE = 15;
-const INNER_WIDTH = (window.innerWidth / 2.6) > 180 ? 180 : (window.innerWidth / 2.6);
+const INNER_WIDTH = (window.innerWidth / 2.6) > 180 ? 180 : (window.innerWidth / 2.6); //180: default width
 
 const detailSecond = ({ remainingTime }) => {
   return (
