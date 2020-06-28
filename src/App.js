@@ -2,11 +2,16 @@ import React from 'react';
 import './main.scss'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
-const TARGET_YEAR = 2020;
+const TARGET_YEAR = 2021;
 const TARGET_MONTH = 5; // 0 is january so -1 all the time, check it
-const TARGET_DAY = 27;
+const TARGET_DAY = 19;
 const TARGET_HOUR = 10;
 const TARGET_MINUTE = 15;
+
+const EXAM_DURATION = 135;
+const EXAM_MONTH = "Haziran";
+const EXAM_DAY = "Cumartesi";
+
 const INNER_WIDTH = (window.innerWidth / 2.6) > 180 ? 180 : (window.innerWidth / 2.6); //180: default width
 
 const detailSecond = ({ remainingTime }) => {
@@ -181,9 +186,9 @@ class App extends React.Component {
           <h3 className="details-title">Ayrıntılar</h3>
           <p className="details-detail">Temel Yeterlilik Testi</p>
           <p className="details-detail">Yükseköğretim Kurumları Sınavı 1. Oturum</p>
-          <p className="details-detail">Sınav Tarihi: <span>{TARGET_DAY} Haziran {TARGET_YEAR} Cumartesi</span></p>
-          <p className="details-detail">Sınav Saati: <span>10.15</span></p>
-          <p className="details-detail mb">Sınav Süresi: <span>165 dk</span></p>
+          <p className="details-detail">Sınav Tarihi: <span>{TARGET_DAY} {EXAM_MONTH} {TARGET_YEAR} {EXAM_DAY}</span></p>
+          <p className="details-detail">Sınav Saati: <span>{TARGET_HOUR}.{TARGET_MINUTE}</span></p>
+          <p className="details-detail mb">Sınav Süresi: <span>{EXAM_DURATION} dk</span></p>
 
         </section>
 
